@@ -11,11 +11,13 @@ public class LetterKill : MonoBehaviour
     Vector3 ThisPosRight;
     
     string ThisLetter;
+    float   timer;
     // Start is called before the first frame update
     void Start()
     {
-        scorepoints = 50;
+        scorepoints = 10;
         SetThisLetter();
+        
     }
 
     // Update is called once per frame
@@ -54,8 +56,10 @@ public class LetterKill : MonoBehaviour
 
             if(Input.GetKeyDown(ThisLetter) && SpawnOccupiedLeft.Length == 0)
         {
-           Scoreinfo ScoreIn = GetComponent<Scoreinfo>();
-           ScoreIn.scoresystem(scorepoints);
+
+           GameObject ScoreGameObject = GameObject.Find("EnemyLetter Variant 1");
+           Scoreinfo ScoreINF =  ScoreGameObject.GetComponent<Scoreinfo>();
+           ScoreINF.scoresystem(scorepoints);
          Destroy(gameObject);
         }
     }
