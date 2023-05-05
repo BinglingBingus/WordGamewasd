@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2225832985554205489}
   - component: {fileID: 3443536445904463296}
   m_Layer: 0
-  m_Name: W
+  m_Name: EnemyLetter
   m_TagString: WordEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,8 +129,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -187,6 +187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Letters:
+  - w
+  - a
+  - s
+  - d
   - w
   - a
   - s

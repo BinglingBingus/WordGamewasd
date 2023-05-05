@@ -17,6 +17,14 @@ public class SpawnLetter : MonoBehaviour
         LetterSpawn1.x += 8.05f;
         LetterSpawningSystem();
     }
+    void OnEnable()
+    {
+        
+        LetterSpawn1 = LetterSpawn[0].position;
+        LetterSpawn1.x += 8.05f;
+        LetterSpawningSystem();
+        Debug.Log("Enabled");
+    }
 
     void LetterSpawningSystem()
     {
@@ -25,10 +33,8 @@ public class SpawnLetter : MonoBehaviour
         Instantiate(W,LetterSpawn[1].position,Quaternion.identity);
         Instantiate(W,LetterSpawn[2].position,Quaternion.identity);
         Instantiate(W,LetterSpawn[3].position,Quaternion.identity);
+        GetComponent<SpawnLetter>().enabled = false;
     }
     // Update is called once per frame
-    void Update()
-    {
 
-    }
 }
