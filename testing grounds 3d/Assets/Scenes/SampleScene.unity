@@ -984,6 +984,11 @@ MonoBehaviour:
   - {fileID: 1154540019}
   - {fileID: 2110379037}
   - {fileID: 2095573221}
+  GhostLetterSpawn:
+  - {x: 1023, y: 362, z: 9.34}
+  - {x: 1026.8, y: 362, z: 9.34}
+  - {x: 1030.6, y: 362, z: 9.34}
+  - {x: 1034.4, y: 362, z: 9.34}
 --- !u!4 &1435093586
 Transform:
   m_ObjectHideFlags: 0
