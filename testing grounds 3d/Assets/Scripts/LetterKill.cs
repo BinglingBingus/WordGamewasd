@@ -11,7 +11,8 @@ public class LetterKill : MonoBehaviour
     Vector3 ThisPosLeft;
     Vector3 ThisPosRight;
     Vector3 ThisPosUp;
-    Vector3 ThisPosDown;    
+    Vector3 ThisPosDown;  
+    Vector3 ThisPosFarRight;  
     string ThisLetter;
     float   timer;
     // Start is called before the first frame update
@@ -44,26 +45,30 @@ public class LetterKill : MonoBehaviour
         ThisPosLeft.x   -=      4.025f;
         ThisPosRight    =       ThisLetterTran.position;
         ThisPosRight.x  -=      -4.025f;
-        ThisPosUp       =       ThisLetterTran.position;
-        ThisPosUp.y     -=      -4.025f;
-        ThisPosDown     =       ThisLetterTran.position;
-        ThisPosDown.y   -=      4.025f;
+        ThisPosUp       =       ThisLetterTran.position;                                    //wip
+        ThisPosUp.y     -=      -4.025f;                                                    //wip
+        ThisPosDown     =       ThisLetterTran.position;                                    //wip
+        ThisPosDown.y   -=      4.025f;                                                     //wip
+
+        ThisPosFarRight =       ThisLetterTran.position;
+        ThisPosFarRight.x -=      16.2f;                                                    //wip
 
 
-        Collider[] SpawnOccupiedDown    = Physics.OverlapSphere(ThisPosDown, 1f);
-        Collider[] SpawnOccupiedUp      = Physics.OverlapSphere(ThisPosUp, 1f);
+        Collider[] SpawnOccupiedDown    = Physics.OverlapSphere(ThisPosDown, 1f);           //wip
+        Collider[] SpawnOccupiedUp      = Physics.OverlapSphere(ThisPosUp, 1f);             //wip
         Collider[] SpawnOccupiedRight   = Physics.OverlapSphere(ThisPosRight,0.5f);
         Collider[] SpawnOccupiedLeft    = Physics.OverlapSphere(ThisPosLeft,0.5f);
+        Collider[] SpawnOccupiedFarRight = Physics.OverlapSphere(ThisPosFarRight,0.5f);     //wip
+
         //if nothing is below then change colour and wait for entire above row to be empty and then go up
         //Debug.Log(SpawnOccupiedDown[0]);
-        if(SpawnOccupiedUp.Length == 1 && SpawnOccupiedRight.Length == 0 && SpawnOccupiedDown.Length == 1)
+        //if(SpawnOccupiedUp.Length == 1 && SpawnOccupiedRight.Length == 0 && SpawnOccupiedDown.Length == 1)
+        if(SpawnOccupiedUp.Length == 1 && SpawnOccupiedDown.Length == 1 && SpawnOccupiedRight.Length == 1)
             {
             ThisLetterTran.position = ThisPosUp;
-            
             GetComponent<TMP_Text>().color = Color.green;
-            GameObject Meth =  GameObject.Find("LetterSpawnSystem");
-            SpawnLetter letterspawn = Meth.GetComponent<SpawnLetter>();
-            letterspawn.enabled = true;
+
+
             }
         if(SpawnOccupiedUp.Length == 2)
         {
@@ -79,6 +84,7 @@ public class LetterKill : MonoBehaviour
         GetComponent<TMP_Text>().color = Color.green;
 
         
+        // This is base game
         //This is checking if left of letter is occupied
             if(Input.GetKeyDown(ThisLetter) && SpawnOccupiedLeft.Length == 0)
             {
@@ -91,11 +97,14 @@ public class LetterKill : MonoBehaviour
         //This is checking if left and right of letter is occupied and then enabling LettterSpawn
             if(Input.GetKeyDown(ThisLetter) && SpawnOccupiedLeft.Length == 0 && SpawnOccupiedRight.Length == 0)
             {
-            //GameObject Meth =  GameObject.Find("LetterSpawnSystem");
-            //SpawnLetter letterspawn = Meth.GetComponent<SpawnLetter>();
-                //letterspawn.enabled = true;
-                Debug.Log("works");
-                Destroy(gameObject);
+
+            GameObject Meth =  GameObject.Find("LetterSpawnSystem");
+            SpawnLetter letterspawn = Meth.GetComponent<SpawnLetter>();
+            letterspawn.enabled = true;
+            Debug.Log("works");
+            Destroy(gameObject);
+                
+
             }
         
 

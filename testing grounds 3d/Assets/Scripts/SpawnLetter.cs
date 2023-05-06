@@ -30,10 +30,10 @@ public class SpawnLetter : MonoBehaviour
     void LetterSpawningSystem()
     {
         
-        //Instantiate(W,LetterSpawn[0].position,Quaternion.identity);
-        //Instantiate(W,LetterSpawn[1].position,Quaternion.identity);
-        //Instantiate(W,LetterSpawn[2].position,Quaternion.identity);
-        //Instantiate(W,LetterSpawn[3].position,Quaternion.identity);
+        Instantiate(W,LetterSpawn[0].position,Quaternion.identity);
+        Instantiate(W,LetterSpawn[1].position,Quaternion.identity);
+        Instantiate(W,LetterSpawn[2].position,Quaternion.identity);
+        Instantiate(W,LetterSpawn[3].position,Quaternion.identity);
         Instantiate(W,GhostLetterSpawn[0],Quaternion.identity);
         Instantiate(W,GhostLetterSpawn[1],Quaternion.identity);
         Instantiate(W,GhostLetterSpawn[2],Quaternion.identity);
