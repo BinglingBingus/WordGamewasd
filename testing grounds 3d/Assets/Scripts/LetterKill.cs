@@ -12,9 +12,8 @@ public class LetterKill : MonoBehaviour
     Vector3 ThisPosRight;
     Vector3 ThisPosUp;
     Vector3 ThisPosDown;  
-    Vector3 ThisPosFarRight;  
     string ThisLetter;
-    float   timer;
+    public string NotThisLetter;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,23 +49,29 @@ public class LetterKill : MonoBehaviour
         ThisPosDown     =       ThisLetterTran.position;                                    //wip
         ThisPosDown.y   -=      4.025f;                                                     //wip
 
-        ThisPosFarRight =       ThisLetterTran.position;
-        ThisPosFarRight.x -=      16.2f;                                                    //wip
-
 
         Collider[] SpawnOccupiedDown    = Physics.OverlapSphere(ThisPosDown, 1f);           //wip
         Collider[] SpawnOccupiedUp      = Physics.OverlapSphere(ThisPosUp, 1f);             //wip
         Collider[] SpawnOccupiedRight   = Physics.OverlapSphere(ThisPosRight,0.5f);
         Collider[] SpawnOccupiedLeft    = Physics.OverlapSphere(ThisPosLeft,0.5f);
-        Collider[] SpawnOccupiedFarRight = Physics.OverlapSphere(ThisPosFarRight,0.5f);     //wip
+        Collider[] SpawnOccupiedArea    = Physics.OverlapSphere(ThisLetterTran.position, 20f);
+        
 
         //if nothing is below then change colour and wait for entire above row to be empty and then go up
         //Debug.Log(SpawnOccupiedDown[0]);
         //if(SpawnOccupiedUp.Length == 1 && SpawnOccupiedRight.Length == 0 && SpawnOccupiedDown.Length == 1)
-        if(SpawnOccupiedUp.Length == 1 && SpawnOccupiedDown.Length == 1 && SpawnOccupiedRight.Length == 1)
+        if(SpawnOccupiedArea.Length == 7)
             {
-            ThisLetterTran.position = ThisPosUp;
+            
             GetComponent<TMP_Text>().color = Color.green;
+            ThisLetterTran.position = ThisPosUp;
+
+            if(SpawnOccupiedRight.Length == 0)
+            {
+            GameObject Meth =  GameObject.Find("LetterSpawnSystem");
+            SpawnLetter letterspawn = Meth.GetComponent<SpawnLetter>();
+            letterspawn.enabled = true;
+            }
 
 
             }
@@ -74,13 +79,12 @@ public class LetterKill : MonoBehaviour
         {
             
             GetComponent<TMP_Text>().color = Color.gray;
-            GetComponent<TMP_Text>().alpha = 0.1f;
+            GetComponent<TMP_Text>().alpha = 0.8f;
 
         }
         if(SpawnOccupiedDown.Length == 2) // Execute normal code
         {
         
-        Debug.Log(SpawnOccupiedDown.Length);
         GetComponent<TMP_Text>().color = Color.green;
 
         
@@ -89,26 +93,23 @@ public class LetterKill : MonoBehaviour
             if(Input.GetKeyDown(ThisLetter) && SpawnOccupiedLeft.Length == 0)
             {
 
-           GameObject ScoreGameObject = GameObject.Find("EnemyLetter Variant 1");
+           GameObject ScoreGameObject = GameObject.Find("Score");
            Scoreinfo ScoreINF =  ScoreGameObject.GetComponent<Scoreinfo>();
            ScoreINF.scoresystem(scorepoints);
            Destroy(gameObject);
             }
-        //This is checking if left and right of letter is occupied and then enabling LettterSpawn
-            if(Input.GetKeyDown(ThisLetter) && SpawnOccupiedLeft.Length == 0 && SpawnOccupiedRight.Length == 0)
+            if(Input.GetKeyDown("w") || Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d"))
             {
-
-            GameObject Meth =  GameObject.Find("LetterSpawnSystem");
-            SpawnLetter letterspawn = Meth.GetComponent<SpawnLetter>();
-            letterspawn.enabled = true;
-            Debug.Log("works");
-            Destroy(gameObject);
-                
-
+            NotThisLetter = Input.inputString;
+            if(NotThisLetter != ThisLetter && SpawnOccupiedLeft.Length ==0)
+            {
+                    Debug.Log("wrong key");
+        GameObject ScoreGameObject = GameObject.Find("Score");
+           Scoreinfo ScoreINF =  ScoreGameObject.GetComponent<Scoreinfo>();
+           ScoreINF.scoresystem(-scorepoints *5);
+                    
             }
-        
-
-
+            }
         }
 
     }
